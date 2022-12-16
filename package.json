@@ -1,0 +1,24 @@
+{
+  "name": "edm-generator",
+  "author": "JohnnyWang",
+  "description": "A tool for developer to create their EDM project more efficiently with Pug and Premailer.",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "task": "gulp --tasks",
+    "dev": "cross-env NODE_ENV=development gulp dev",
+    "build": "cross-env NODE_ENV=production gulp build"
+  },
+  "devDependencies": {
+    "axios": "1.2.1",
+    "cheerio": "1.0.0-rc.12",
+    "cross-env": "7.0.3",
+    "gulp": "4.0.2",
+    "gulp-live-server": "0.0.31",
+    "gulp-pug": "5.0.0",
+    "pug": "3.0.2",
+    "through2": "4.0.2",
+    "ws": "8.11.0"
+  }
+}

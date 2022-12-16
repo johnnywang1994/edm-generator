@@ -1,0 +1,21 @@
+h1, p {
+  margin: 0;
+}
+
+p {
+  font-size: 1em;
+}
+
+a {
+  /* */
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+.container {
+  margin: 0 auto;
+  text-align: center;
+}

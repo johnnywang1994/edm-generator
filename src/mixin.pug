@@ -1,0 +1,20 @@
+mixin container(maxWidth = '600px')
+  - var style = `max-width: ${maxWidth}`;
+  div(class="container" style="" + style)&attributes(attributes)
+    block
+
+mixin background(value)
+  if value.startsWith('http')
+    - var style = `background-image: url('${value}')`;
+  else
+    - var style = `background-color: ${value}`;
+  div(style="" + style)&attributes(attributes)
+    block
+
+mixin link(href, newPage = false)
+  a(href=href target=newPage ? "_blank" : false)&attributes(attributes)
+    block
+
+mixin img(src, alt="image not found")
+  img(src=src alt=alt)&attributes(attributes)
+
