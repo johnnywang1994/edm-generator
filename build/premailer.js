@@ -1,6 +1,7 @@
 const axios = require('axios');
 const cheerio = require('cheerio');
 const through2 = require('through2');
+const config = require('../config');
 
 const endpoint = 'https://premailer.dialect.ca/';
 
@@ -30,9 +31,9 @@ function getFormDataFromConfig({
   return formData;
 }
 
-async function premailer(html, config) {
-  config.html = html;
-  const formData = getFormDataFromConfig(config);
+async function premailer(html, premailerConfig) {
+  premailerConfig.html = html;
+  const formData = getFormDataFromConfig(premailerConfig);
   const res = await axios({
     method: 'post',
     url: endpoint,
@@ -52,11 +53,11 @@ async function premailer(html, config) {
   return false;
 }
 
-function gulpPremailerPlugin(premailerConfig) {
+function gulpPremailerPlugin() {
   return through2.obj(function gulpPremailer(file, enc, cb) {
     const html = file.contents.toString();
     if (html) {
-      premailer(html, premailerConfig).then((compiled) => {
+      premailer(html, config.build.premailer).then((compiled) => {
         file.contents = Buffer.from(compiled);
         cb(null, file);
       });

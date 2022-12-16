@@ -7,14 +7,17 @@ const config = require('./config');
 
 function compilePugWrapper({ dev = false, broadcastReload } = {}) {
   return function compilePug() {
-    const pipeline = src(config.entry)
-      .pipe(pug({
+    let pipeline = src(config.entry);
+
+    if (config.entry.endsWith('.pug')) {
+      pipeline.pipe(pug({
         pretty: dev,
         locals: {
           nodeEnv: process.env.NODE_ENV,
           isProd: process.env.NODE_ENV === 'production',
         },
       }));
+    }
 
     if (dev) {
       if (typeof broadcastReload === 'function') {
@@ -22,7 +25,7 @@ function compilePugWrapper({ dev = false, broadcastReload } = {}) {
       }
       return pipeline.pipe(dest(config.build.outDir));
     }
-    if (typeof config.premailer === 'object') {
+    if (typeof config.build.premailer === 'object') {
       return pipeline
         .pipe(premailer(config.premailer))
         .pipe(dest(config.build.outDir));

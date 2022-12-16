@@ -52,6 +52,10 @@ $ yarn build
 module.exports = {
   // entrypoint of compiled pug file
   entry: './src/index.pug',
+  // setting entry to html file will close the default reload feature
+  // if you need reload feature, please put the `reload.js` inside your index.html in DEV mode
+  // and remember to remove it when you are OK to build for production.
+  // entry: './src/index.html',
   // watch files to rerun gulp compile & reload dev server
   watch: './src/**/*',
   // if you don't need to use devServer, then put false
