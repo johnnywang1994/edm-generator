@@ -1,6 +1,7 @@
-const { src, dest, watch } = require('gulp');
+const { src, dest, watch, series } = require('gulp');
 const pug = require('gulp-pug');
 const sass = require('gulp-sass')(require('sass'));
+const postcss = require('gulp-postcss');
 const createDevServer = require('./build/dev-server');
 const createReloadServer = require('./build/reload-server');
 const premailer = require('./build/premailer');
@@ -44,6 +45,7 @@ function compilePugWrapper({ dev = false, broadcastReload } = {}) {
 function buildStyles() {
   return src('./src/**/*.scss')
     .pipe(sass().on('error', sass.logError))
+    .pipe(postcss())
     .pipe(dest((file) => file.base));
 }
 
@@ -56,17 +58,15 @@ function dev() {
     server.start();
   }
 
-  const task = compilePugWrapper({
+  const mainTask = compilePugWrapper({
     dev: true,
     broadcastReload
   });
 
+  // watch pug & scss file change to reload dev server
   // watch scss file change to recompile scss
-  buildStyles();
-  watch('./src/**/*.scss', buildStyles);
-  // watch pug & css file change to reload dev server
-  task();
-  watch(config.watch, task);
+  mainTask();
+  watch(config.watch, series(buildStyles, mainTask));
 }
 
 module.exports.dev = dev;

@@ -2,13 +2,11 @@ extends ../module/layout.pug
 
 block head
   title EDM Generator
-
-block styles
   style
     include style.css
 
 block content
-  +container('600px')
+  +container()(class="max-w-screen-sm text-center")
     h1 Hello EDM Title
     p Great edm generator
     p

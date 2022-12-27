@@ -1,6 +1,6 @@
 module.exports = {
   entry: './src/demo/index.pug',
-  watch: ['./src/**/*.pug', './src/**/*.css'],
+  watch: ['./src/**/*.pug', './src/**/*.scss'],
   devServer: {
     port: 8080,
     wsPort: 8000,

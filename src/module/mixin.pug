@@ -1,6 +1,5 @@
-mixin container(maxWidth = '600px')
-  - var style = `max-width: ${maxWidth}`;
-  div(class="container" style="" + style)&attributes(attributes)
+mixin container()
+  div(class="container mx-auto")&attributes(attributes)
     block
 
 mixin background(value)

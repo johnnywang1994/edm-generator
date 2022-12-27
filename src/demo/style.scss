@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 // Premailer will remove this @import statement, remember to put it on your bundled HTML file style tag if you need to use the font
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;700;900&family=Roboto:wght@400;900&display=swap');
 
@@ -32,7 +36,7 @@ ul, ol {
   padding: 0;
 }
 
-.container {
-  margin: 0 auto;
-  text-align: center;
-}
+// .container {
+//   margin: 0 auto;
+//   text-align: center;
+// }

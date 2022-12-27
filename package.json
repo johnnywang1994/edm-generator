@@ -11,17 +11,21 @@
     "build": "cross-env NODE_ENV=production gulp build"
   },
   "devDependencies": {
+    "autoprefixer": "10.4.13",
     "axios": "1.2.1",
     "cheerio": "1.0.0-rc.12",
     "cross-env": "7.0.3",
     "declassify": "2.1.0",
     "gulp": "4.0.2",
     "gulp-live-server": "0.0.31",
+    "gulp-postcss": "9.0.1",
     "gulp-pug": "5.0.0",
     "gulp-sass": "5.1.0",
     "juice": "8.1.0",
+    "postcss": "8.4.20",
     "pug": "3.0.2",
     "sass": "1.57.1",
+    "tailwindcss": "3.2.4",
     "through2": "4.0.2",
     "ws": "8.11.0"
   }

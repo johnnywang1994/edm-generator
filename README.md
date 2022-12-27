@@ -8,6 +8,8 @@ This is an EDM generator tool which let you develop your EDM more efficiently by
 - Gulp
 - Pug
 - Sass Precompile
+- Postcss
+- Tailwind
 - Websocket
 - Premailer
 - Juice
