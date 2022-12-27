@@ -4,6 +4,7 @@ const sass = require('gulp-sass')(require('sass'));
 const createDevServer = require('./build/dev-server');
 const createReloadServer = require('./build/reload-server');
 const premailer = require('./build/premailer');
+const juice = require('./build/juice');
 const config = require('./config');
 
 function compilePugWrapper({ dev = false, broadcastReload } = {}) {
@@ -30,6 +31,10 @@ function compilePugWrapper({ dev = false, broadcastReload } = {}) {
     if (typeof config.build.premailer === 'object') {
       return pipeline
         .pipe(premailer(config.premailer))
+        .pipe(dest(config.build.outDir));
+    } else if (typeof config.build.juice === 'object') {
+      return pipeline
+        .pipe(juice())
         .pipe(dest(config.build.outDir));
     }
     return pipeline.pipe(dest(config.build.outDir));

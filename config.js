@@ -12,11 +12,10 @@ module.exports = {
     assetsDir: process.env.NODE_ENV === 'production'
       ? 'https://my-cdn/demo/'
       : './demo/',
-    premailer: {
-      removeClasses: true,
-      removeIds: true,
-      removeComments: true,
-      preserveStyles: false,
+    juice: {
+      webResources: {
+        images: false,
+      },
     },
   },
 };

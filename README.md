@@ -10,6 +10,7 @@ This is an EDM generator tool which let you develop your EDM more efficiently by
 - Sass Precompile
 - Websocket
 - Premailer
+- Juice
 
 
 ## Usage
@@ -32,7 +33,7 @@ $ yarn dev
 ```
 
 ### 4. build result
-Run build will build up your HTML and by default through `Premailer` compiled, you can change the settings in `config.js`
+Run build will build up your HTML and by default through `Juice` compiled, you can change the settings in `config.js` to use `Premailer` or to disable this feature
 ```bash
 $ yarn build
 ```
@@ -43,8 +44,8 @@ $ yarn build
 - the reload server just easily reload the whole page, it's not a HMR module.
 - the reload script will only be injected into your HTML in DEV mode.
 
-### Premailer
-- the premailer will only run in PRODUCTION mode.
+### Juice / Premailer
+- the juice/premailer will only run in PRODUCTION mode.
 
 
 ## Configuration
@@ -74,16 +75,24 @@ module.exports = {
     assetsDir: process.env.NODE_ENV === 'production'
       ? 'https://my-cdn/demo/'
       : './demo/',
+    // compile build result with Juice
+    // Juice is relatively stable(Default use juice)
+    // ref: https://www.npmjs.com/package/juice
+    juice: {
+      webResources: {
+        images: false,
+      },
+    },
     // compile build result with Premailer
     // ref: https://premailer.dialect.ca/
-    // if you don't need to use Premailer, then put false
+    // if you don't need to use Premailer, then put false or undefined
     // premailer: false,
-    premailer: {
-      removeClasses: true,
-      removeIds: true,
-      removeComments: true,
-      preserveStyles: false,
-    },
+    // premailer: {
+    //   removeClasses: true,
+    //   removeIds: true,
+    //   removeComments: true,
+    //   preserveStyles: false,
+    // },
   },
 };
 ```
@@ -96,3 +105,6 @@ module.exports = {
 - [style in head](https://www.campaignmonitor.com/css/style-element/style-in-head/)
 - [How to make css play nice in html emails](https://customer.io/blog/how-to-make-css-play-nice-in-html-emails-without-breaking-everything/)
 - [Premailer](https://premailer.dialect.ca/)
+- [Maizzle](https://maizzle.com/)
+- [Juice](https://www.npmjs.com/package/juice)
+- [Declassify](https://www.npmjs.com/package/declassify)
