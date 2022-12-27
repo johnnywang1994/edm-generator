@@ -9,6 +9,9 @@ module.exports = {
   },
   build: {
     outDir: 'dist',
+    assetsDir: process.env.NODE_ENV === 'production'
+      ? 'https://my-cdn/demo/'
+      : './demo/',
     premailer: {
       removeClasses: true,
       removeIds: true,
