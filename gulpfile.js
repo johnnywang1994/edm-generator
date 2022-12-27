@@ -16,7 +16,7 @@ function compilePugWrapper({ dev = false, broadcastReload } = {}) {
         locals: {
           nodeEnv: process.env.NODE_ENV,
           isProd: process.env.NODE_ENV === 'production',
-          CDN: config.assetsDir,
+          CDN: config.build.assetsDir,
         },
       }));
     }

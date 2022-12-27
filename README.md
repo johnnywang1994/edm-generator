@@ -70,6 +70,10 @@ module.exports = {
   build: {
     // output folder
     outDir: 'dist',
+    // assets base path, we can use the injected global variable `CDN` base string in pug file
+    assetsDir: process.env.NODE_ENV === 'production'
+      ? 'https://my-cdn/demo/'
+      : './demo/',
     // compile build result with Premailer
     // ref: https://premailer.dialect.ca/
     // if you don't need to use Premailer, then put false
