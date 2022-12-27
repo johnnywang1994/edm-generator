@@ -4,7 +4,7 @@ mixin container(maxWidth = '600px')
     block
 
 mixin background(value)
-  if value.startsWith('http')
+  if value.startsWith('http') || value.startsWith('.')
     - var style = `background-image: url('${value}')`;
   else
     - var style = `background-color: ${value}`;
@@ -18,3 +18,10 @@ mixin link(href, newPage = false)
 mixin img(src, alt="image not found")
   img(src=src alt=alt)&attributes(attributes)
 
+mixin icon(src, size="20px", alt="image not found")
+  - var style = `width: ${size};height ${size}`;
+  img(src=src alt=alt style="" + style)
+
+mixin table
+  table(border="0" cellspacing="0" cellpadding="0")&attributes(attributes)
+    block

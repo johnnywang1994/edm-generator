@@ -1,5 +1,6 @@
 const { src, dest, watch } = require('gulp');
 const pug = require('gulp-pug');
+const sass = require('gulp-sass')(require('sass'));
 const createDevServer = require('./build/dev-server');
 const createReloadServer = require('./build/reload-server');
 const premailer = require('./build/premailer');
@@ -34,6 +35,12 @@ function compilePugWrapper({ dev = false, broadcastReload } = {}) {
   };
 }
 
+function buildStyles() {
+  return src('./src/**/*.scss')
+    .pipe(sass().on('error', sass.logError))
+    .pipe(dest((file) => file.base));
+}
+
 function dev() {
   let broadcastReload;
   if (typeof config.devServer === 'object') {
@@ -48,6 +55,10 @@ function dev() {
     broadcastReload
   });
 
+  // watch scss file change to recompile scss
+  buildStyles();
+  watch('./src/**/*.scss', buildStyles);
+  // watch pug & css file change to reload dev server
   task();
   watch(config.watch, task);
 }
