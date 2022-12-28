@@ -13,6 +13,7 @@
   "devDependencies": {
     "autoprefixer": "10.4.13",
     "axios": "1.2.1",
+    "browser-sync": "^2.27.11",
     "cheerio": "1.0.0-rc.12",
     "cross-env": "7.0.3",
     "declassify": "2.1.0",

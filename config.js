@@ -1,15 +1,15 @@
 module.exports = {
-  entry: './src/demo/index.pug',
-  watch: ['./src/**/*.pug', './src/**/*.scss'],
+  base: './src/demo',
+  entry: 'index.pug',
   devServer: {
+    server: ['dist', 'public'],
     port: 8080,
-    wsPort: 8000,
     reloadDelay: 1000,
-    serveDir: ['dist', 'public'],
+    open: false,
   },
   build: {
     outDir: 'dist',
-    assetsDir: process.env.NODE_ENV === 'production'
+    cdnBase: process.env.NODE_ENV === 'production'
       ? 'https://my-cdn/demo/'
       : './demo/',
     juice: {

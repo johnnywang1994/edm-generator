@@ -7,10 +7,9 @@ This is an EDM generator tool which let you develop your EDM more efficiently by
 ## Tech
 - Gulp
 - Pug
-- Sass Precompile
+- Sass
 - Postcss
 - Tailwind
-- Websocket
 - Premailer
 - Juice
 
@@ -42,10 +41,6 @@ $ yarn build
 
 
 ## Notes
-### Reload Server
-- the reload server just easily reload the whole page, it's not a HMR module.
-- the reload script will only be injected into your HTML in DEV mode.
-
 ### Juice / Premailer
 - the juice/premailer will only run in PRODUCTION mode.
 
@@ -54,27 +49,23 @@ $ yarn build
 ### Default config
 ```js
 module.exports = {
-  // entrypoint of compiled pug file
-  entry: './src/demo/index.pug',
-  // setting entry to html file will close the default reload feature
-  // if you need reload feature, please put the `reload.js` inside your index.html in DEV mode
-  // and remember to remove it when you are OK to build for production.
-  // entry: './src/index.html',
-  // watch files to rerun gulp compile & reload dev server
-  watch: ['./src/**/*.pug', './src/**/*.css'],
-  // if you don't need to use devServer, then put false
-  // devServer: false,
+  // project folder
+  base: './src/demo',
+  // entrypoint of project folder, should be pug or html
+  entry: 'index.pug',
+  // browser sync config options
+  // https://browsersync.io/docs/options
   devServer: {
-    port: 8080, // dev server port
-    wsPort: 8000, // reload websocket server port
-    reloadDelay: 1000, // ms
-    serveDir: ['dist', 'public'], // serving dir for devServer
+    server: ['dist', 'public'],
+    port: 8080,
+    reloadDelay: 1000,
+    open: false,
   },
   build: {
     // output folder
     outDir: 'dist',
     // assets base path, we can use the injected global variable `CDN` base string in pug file
-    assetsDir: process.env.NODE_ENV === 'production'
+    cdnBase: process.env.NODE_ENV === 'production'
       ? 'https://my-cdn/demo/'
       : './demo/',
     // compile build result with Juice
@@ -110,3 +101,4 @@ module.exports = {
 - [Maizzle](https://maizzle.com/)
 - [Juice](https://www.npmjs.com/package/juice)
 - [Declassify](https://www.npmjs.com/package/declassify)
+- [Gulp with TailwindCSS](https://github.com/lazymozek/gulp-with-tailwindcss)
