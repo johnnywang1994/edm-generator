@@ -4,6 +4,7 @@ const pug = require('gulp-pug');
 const sass = require('gulp-sass')(require('sass'));
 const postcss = require('gulp-postcss');
 const browserSync = require('browser-sync').create();
+const tailwindcss = require('tailwindcss');
 const premailer = require('./build/premailer');
 const juice = require('./build/juice');
 const config = require('./config');
@@ -12,14 +13,16 @@ const isProd = process.env.NODE_ENV === 'production';
 
 const entryPath = path.resolve(config.base, config.entry);
 
+try {
+  config.build.pugLocals = require(path.resolve(config.base, 'locals.js'));
+} catch {
+  config.build.pugLocals = {};
+}
+
 function getPugOptions() {
   return {
     pretty: !isProd,
-    locals: {
-      nodeEnv: process.env.NODE_ENV,
-      isProd,
-      CDN: config.build.cdnBase,
-    },
+    locals: config.build.pugLocals,
   };
 }
 
@@ -57,19 +60,19 @@ function devHTML() {
 function devStyles() {
   return src(`${config.base}/**/*.scss`)
     .pipe(sass().on('error', sass.logError))
-    .pipe(postcss())
+    .pipe(postcss([tailwindcss(`${config.base}/tailwind.config.js`)]))
     .pipe(dest((file) => file.base));
 }
 
 function watchFiles() {
   const ext = path.extname(entryPath);
   watch(
-    `${config.base}/**/*${ext}`,
+    ['src/module/**/*.pug', `${config.base}/**/*${ext}`],
     // devStyles must before devHTML to let tailwind jit detect first
     series(devStyles, devHTML, previewReload)
   );
   watch(
-    ['tailwind.config.js', `${config.base}/**/*.scss`],
+    [`${config.base}/tailwind.config.js`, `${config.base}/**/*.scss`],
     series(devStyles, previewReload)
   );
   console.log("Watching for Changes..\n");

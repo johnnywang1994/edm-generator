@@ -9,9 +9,6 @@ module.exports = {
   },
   build: {
     outDir: 'dist',
-    cdnBase: process.env.NODE_ENV === 'production'
-      ? 'https://my-cdn/demo/'
-      : './demo/',
     juice: {
       webResources: {
         images: false,

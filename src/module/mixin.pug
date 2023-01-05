@@ -1,8 +1,9 @@
-mixin container()
+mixin contain()
   div(class="max-w-screen-sm mx-auto")&attributes(attributes)
     block
 
 mixin background(value)
+  - value = (CDN || '') + value
   if value.startsWith('http') || value.startsWith('.')
     - var style = `background-image: url('${value}')`;
   else
@@ -15,10 +16,14 @@ mixin link(href, newPage = false)
     block
 
 mixin img(src, alt="image not found")
+  if !src.startsWith('http')
+    - src = (CDN || '')+src
   img(src=src alt=alt)&attributes(attributes)
 
 mixin icon(src, size="20px", alt="image not found")
   - var style = `width: ${size};height ${size}`;
+  if !src.startsWith('http')
+    - src = (CDN || '')+src
   img(src=src alt=alt style="" + style)
 
 mixin table

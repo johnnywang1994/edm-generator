@@ -1,7 +1,7 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 module.exports = {
   mode: 'jit',
-  content: ['./src/**/*.{pug,html}'],
+  content: ['./src/demo/*.{pug,html}'],
   darkMode: 'media', // 'media' or 'class'
   theme: {
     fontFamily: {

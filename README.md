@@ -9,7 +9,7 @@ This is an EDM generator tool which let you develop your EDM more efficiently by
 - Pug
 - Sass
 - Postcss
-- Tailwind
+- TailwindCSS
 - Premailer
 - Juice
 
@@ -39,6 +39,16 @@ Run build will build up your HTML and by default through `Juice` compiled, you c
 $ yarn build
 ```
 
+### 5. TailwindCSS support
+- Add Tailwindcss snippet
+```css
+@tailwind components;
+@tailwind utilities;
+```
+> Dont put `@tailwind base;` since that would generate tailwind's css variables which may cause some issue in email client.
+- Create Tailwindcss config in your `base` directory
+> remember to check your `content` property in tailwind config to ensure not to generate unused class names.
+
 
 ## Notes
 ### Juice / Premailer
@@ -56,7 +66,7 @@ module.exports = {
   // browser sync config options
   // https://browsersync.io/docs/options
   devServer: {
-    server: ['dist', 'public'],
+    server: ['dist', 'public'], // these folder will be served at root
     port: 8080,
     reloadDelay: 1000,
     open: false,
@@ -64,10 +74,6 @@ module.exports = {
   build: {
     // output folder
     outDir: 'dist',
-    // assets base path, we can use the injected global variable `CDN` base string in pug file
-    cdnBase: process.env.NODE_ENV === 'production'
-      ? 'https://my-cdn/demo/'
-      : './demo/',
     // compile build result with Juice
     // Juice is relatively stable(Default use juice)
     // ref: https://www.npmjs.com/package/juice
@@ -88,6 +94,18 @@ module.exports = {
     // },
   },
 };
+```
+
+### Local config
+In your `base` directory, there should be a `locals.js` file which contains pug locals variables.
+```js
+module.exports = {
+  // pug locals variables
+  // https://www.npmjs.com/package/gulp-pug
+  CDN: process.env.NODE_ENV === 'production'
+    ? 'https://my-cdn/demo/'
+    : './demo/',
+}
 ```
 
 
